@@ -15,10 +15,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Generate Tag Name
+      - name: Get Version from pubspec.yaml
+        id: version_check
+        run: |
+          VERSION=$(grep '^version: ' frontend/pubspec.yaml | sed 's/version: //' | cut -d '+' -f 1 | xargs)
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Create and Push Git Tag
         id: tag_gen
         run: |
-          TAG_NAME="v1.0.0-alpha.${{ github.run_number }}"
+          TAG_NAME="v${{ steps.version_check.outputs.version }}-alpha"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -f "$TAG_NAME"
+          git push -f origin "$TAG_NAME"
           echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
 
       - name: Create Release
