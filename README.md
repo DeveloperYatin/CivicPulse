@@ -4,6 +4,9 @@
 [![Flutter SDK](https://img.shields.io/badge/Flutter-3.35.7-blue.svg)](https://flutter.dev)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-green.svg)](https://fastapi.tiangolo.com)
 [![Compliance](https://img.shields.io/badge/Compliance-DPDP%20Act%202023-orange.svg)](https://www.meity.gov.in)
+[![Live Pitch Deck](https://img.shields.io/badge/Live-Pitch%20Deck-brightgreen.svg)](https://developeryatin.github.io/CivicPulse/)
+
+🌐 **Live Website:** [https://developeryatin.github.io/CivicPulse/](https://developeryatin.github.io/CivicPulse/)
 
 **CivicPulse** is an AI-powered civic operating layer connecting rural and urban citizens directly with their elected representatives (MLAs & MPs). It bridges the digital divide using ambient voice inputs in local languages, automates representative briefing via WhatsApp daily digests, and utilizes decentralized verification (ISRO Sentinel-2 satellites & community geofencing) to keep public infrastructure reporting fast, reliable, and transparent.
 
