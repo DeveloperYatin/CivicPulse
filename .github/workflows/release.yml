@@ -1,0 +1,50 @@
+name: Create Alpha Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate Tag Name
+        id: tag_gen
+        run: |
+          TAG_NAME="v1.0.0-alpha.${{ github.run_number }}"
+          echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag_gen.outputs.tag_name }}
+          name: "CivicPulse Alpha Release ${{ steps.tag_gen.outputs.tag_name }}"
+          body: |
+            # CivicPulse Alpha Release 🚀
+            
+            This is an automated alpha release for the **CivicPulse** platform, triggered by a push to the `main` branch.
+            
+            ### Features Included:
+            - **Monorepo Repository Reorganization**: Unified front-end and back-end directories.
+            - **Flutter Frontend Client Hub**:
+              - Citizen voice-reporting interface (multilingual translation and validation simulator).
+              - Representative ward ticket queues tracker.
+              - Gram Panchayat offline queue caching and syncing dashboard.
+              - MP Office responsive analytics portal.
+            - **Python FastAPI Backend**:
+              - Asynchronous server entrypoint with Swagger docs.
+              - Simulated Bhashini translation API.
+              - ISRO Sentinel-2 satellite GIS validation API.
+              - Aadhaar secure hash rate-limiting (3 tickets per citizen limit per DPDP Act 2023).
+            - **Automatic slide presentation deck deployment** on `github.io`.
+          draft: false
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
